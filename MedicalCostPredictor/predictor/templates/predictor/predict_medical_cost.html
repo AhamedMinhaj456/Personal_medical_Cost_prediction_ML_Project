@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Cost Predictor</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(to right, #3498db, #2c3e50); /* Background gradient */
+            color: #fff;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        form {
+            width: 80%;
+            max-width: 500px;
+            background-color: rgba(255, 255, 255, 0.9); /* White with transparency */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for button */
+            display: block;
+            margin: 20px auto; /* Center the button */
+            width: 100%; /* Make button full width */
+            font-size: 1.2em; /* Increase font size */
+            font-weight: bold; /* Make font bold */
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h3 {
+            margin-top: 10px;
+            font-size: 1.5em;
+        }
+
+        p {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Medical Cost Predictor</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        
+        <label for="id_age">Age:</label>
+        <input type="number" id="id_age" name="age" required>
+
+        <label for="id_sex">Sex:</label>
+        <select id="id_sex" name="sex" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+
+        <label for="id_bmi">BMI:</label>
+        <input type="number" step="any" id="id_bmi" name="bmi" required>
+
+        <label for="id_children">Children:</label>
+        <input type="number" id="id_children" name="children" required>
+
+        <label for="id_smoker">Smoker:</label>
+        <select id="id_smoker" name="smoker" required>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+
+        <label for="id_region">Region:</label>
+        <select id="id_region" name="region" required>
+            <option value="southeast">Southeast</option>
+            <option value="southwest">Southwest</option>
+            <option value="northeast">Northeast</option>
+            <option value="northwest">Northwest</option>
+        </select>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+        <h2>Predicted Medical Cost:</h2>
+        <p>{{ prediction }}</p>
+    {% endif %}
+</body>
+</html>
